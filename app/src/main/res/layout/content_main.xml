@@ -34,20 +34,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="IntELECT"
-        android:textSize="30dp"
+        android:text="intELECT"
+        android:textSize="45dp"
         android:textColor="#000"
         android:textStyle="bold"
         android:id="@+id/textView"
-        android:layout_marginTop="147dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="171dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Find candidates near you"
+        android:textColor="#000"
+        android:textSize="20dp"
         android:id="@+id/textView2"
         android:layout_above="@+id/editText"
         android:layout_centerHorizontal="true" />
@@ -57,9 +59,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageButton"
-        android:src="@drawable/submit"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/textView2"
-        android:layout_below="@+id/textView2" />
+        android:background="@drawable/submit"
+        android:layout_below="@+id/textView2"
+        android:layout_alignBottom="@+id/editText"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

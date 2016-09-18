@@ -23,9 +23,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "Raleway-Medium.ttf");
+        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "Quicksand-Regular.ttf");
+
         TextView mytextView = (TextView)findViewById(R.id.textView);
         mytextView.setTypeface(myTypeface);
+
+        TextView mytextView2 = (TextView)findViewById(R.id.textView2);
+        mytextView2.setTypeface(myTypeface);
+
         intent=new Intent(this,Main2Activity.class);
         editText=(EditText) findViewById(R.id.editText);
         imageButton=(ImageButton) findViewById(R.id.imageButton);
