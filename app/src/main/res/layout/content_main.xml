@@ -25,7 +25,7 @@
         android:inputType="textPostalAddress"
         android:id="@+id/editText"
         android:layout_marginBottom="105dp"
-        android:text="Zipcode"
+        android:text="Zipcode/State"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/background" />
 

@@ -38,14 +38,14 @@ ListView listView;
 
        // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
       //  setSupportActionBar(toolbar);
-        listView=(ListView) findViewById(R.id.listView);
-        String address=getIntent().getStringExtra(Intent.EXTRA_TEXT);
-        FetchData d= new FetchData();
-        c=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,new ArrayList<String>());
-        d.execute(address);
+        listView = (ListView) findViewById(R.id.listView);
+        String address = getIntent().getStringExtra(Intent.EXTRA_TEXT); //stores the input of the user
+        FetchData d = new FetchData();
+        c = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,
+                new ArrayList<String>()); //displays the string array that the async task returns
+
+        d.execute(address); //calls the async task, which is responsible for
         listView.setAdapter(c);
-
-
 
     }
 
@@ -54,45 +54,47 @@ ListView listView;
 
         private final String LOG_TAG = FetchData.class.getSimpleName();
 
+        //race function parses the data that the API call returns, and returns a string array of "name" and "party", 2 relevant items
+        //to the app
         String[] race(String djsonstr) throws JSONException {
 
+            //retrieves the array of the list of candidates in the first race
             JSONObject j = new JSONObject(djsonstr);
-            JSONArray r=j.getJSONArray("contests").getJSONObject(0).getJSONArray("candidates");
-            // JSONArray candidates = r.getJSONArray(0)["contests"][0]["candidates"];
+            JSONArray r = j.getJSONArray("contests").getJSONObject(0).getJSONArray("candidates");
+
+            //the list of candidates within that zipcode/state
             String[] parsedCandidates = new String [r.length()];
 
+            //pulls out the name and party
             for (int i = 0; i < r.length(); i++) {
                 JSONObject person = r.getJSONObject(i);
                 parsedCandidates[i] = person.getString("name")+", "+person.getString("party");
                 Log.d("fdksf",parsedCandidates[i]);
             }
-       /* String [] r = new String[j["contests"][0].length()];
 
-        Iterator<String> iter = j["contests"][0].keys();
-        for (int i = 0; iter.hasNext();) {
-            r[]
-            iter.next();
-        }*/
-
+            //list of candidates returned on the second screen of the app
             return parsedCandidates;
         }
 
 
         @Override
         protected String[] doInBackground(String... address) {
-            if(address.length==0);
+            if (address.length == 0);
 
             HttpURLConnection urlConnection=null;
             BufferedReader reader=null;
             String djsonstr=null;
-            try{
-                //        final String baseurl=c+address[0]+"&electionId=2000&returnAllAvailableData=true&fields=contests(candidates(candidateUrl%2Cname%2Cparty)%2Cdistrict%2Cid%2Clevel%2Coffice%2CprimaryParty)%2Celection%2CotherElections%2Cstate&key={YOUR_API_KEY}";
+
+            //URI - function call to the API
+            try {
+
                 final String u = "https://www.googleapis.com/civicinfo/v2/voterinfo?address="+address[0]+"&electionId=2000&officialOnly=false&returnAllAvailableData=true&fields=contests(candidates(name%2Cparty)%2Coffice)%2Cstate&key=AIzaSyDZ6k_vSaqtWu3KaFRLqmskprc5rlZBQnc";
                 URL url = new URL(u);
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.connect();
 
+                //processing the input stream and transforming it into a string
                 InputStream inputstream = urlConnection.getInputStream();
                 StringBuffer buffer = new StringBuffer();
                 if (inputstream == null) {
@@ -109,9 +111,8 @@ ListView listView;
                     return null;
                 }
 
+                //holds the json object in the form a string
                 djsonstr = buffer.toString();
-                // Log.v(LOG_TAG, "response string: " + djsonstr);
-                //Log.d("tag42",djsonstr);
 
             }
 
@@ -140,9 +141,6 @@ ListView listView;
                 e.printStackTrace();
                 return null;
             }
-
-
-
 
 
 

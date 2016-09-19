@@ -23,14 +23,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //After importing fonts into assets on the left, create a typeface object
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "Quicksand-Regular.ttf");
 
+        //using the id from activity_main.xml, instantiate 2 objects
         TextView mytextView = (TextView)findViewById(R.id.textView);
         mytextView.setTypeface(myTypeface);
 
         TextView mytextView2 = (TextView)findViewById(R.id.textView2);
         mytextView2.setTypeface(myTypeface);
 
+        //"intent" to move to the next screen upon clicking the "Arrow" image button
         intent=new Intent(this,Main2Activity.class);
         editText=(EditText) findViewById(R.id.editText);
         imageButton=(ImageButton) findViewById(R.id.imageButton);
